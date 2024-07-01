@@ -8,7 +8,17 @@ make install_env
 mkdir bochs
 ```
 
-- 进入bochs-2.6.8打开终端，输入./configure --prefix=${realpath bochs} --enable-debugger --enable-disasm --enable-iodebug --enable-x86-debugger --with-x --with-x11 LDFLAGS='-pthread'，其中修改${realpath bochs}为你的bochs文件子目录，例如./configure --prefix=/home/XXX/桌面/bochs --enable-debugger --enable-disasm --enable-iodebug --enable-x86-debugger --with-x --with-x11 LDFLAGS='-pthread'
+- 解压bochs-2.6.8.tar.gz
+```bash
+tar -zxvf bochs-2.6.8.tar.gz
+```
+
+- 进入bochs-2.6.8
+```bash
+cd bochs-2.6.8
+```
+
+- 配置，修改${realpath bochs}为你的bochs文件子目录，例如./configure --prefix=/home/XXX/桌面/Operating_System/bochs --enable-debugger --enable-disasm --enable-iodebug --enable-x86-debugger --with-x --with-x11 LDFLAGS='-pthread'
 ```bash
 ./configure --prefix=${realpath bochs} --enable-debugger --enable-disasm --enable-iodebug --enable-x86-debugger --with-x --with-x11 LDFLAGS='-pthread'
 ```
@@ -23,7 +33,17 @@ make
 make install
 ```
 
-- 返回根目录并进入bochs文件夹，创建bochsrc.disk
+- 返回根目录
+```bash
+cd ..
+```
+
+- 进入bochs文件夹
+```bash
+cd bochs
+```
+
+- 创建bochsrc.disk
 ```bash
 touch bochsrc.disk
 ```
@@ -96,201 +116,263 @@ deb http://dk.archive.ubuntu.com/ubuntu/ trusty-updates main universe
 ```
 
 - 更新源，有公钥警告就到网上找一下就行
+
 ```bash
 sudo apt-get update
 ```
 
 - 安装gcc4.4版本
+
 ```bash
 sudo apt-get install g++-4.4
 ```
 
 - 如果有gcc版本冲突，换一下优先级
+
 ```bash
 gcc -v
 ```
+
 ```bash
 sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.4 40
 ```
+
 ```bash
 sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-5 60
 ```
+
 ```bash
 update-alternatives --config gcc
 ```
 
 - 在bochs目录下打开终端，从盘分区
+
 ```bash
 fdisk ./hd80M.img
 ```
+
 ```bash
 m
 ```
+
 ```bash
 x
 ```
+
 ```bash
 m
 ```
+
 ```bash
 c
 ```
+
 ```bash
 162
 ```
+
 ```bash
 h
 ```
+
 ```bash
 16
 ```
+
 ```bash
 r
 ```
+
 ```bash
 n
 ```
+
 ```bash
 p
 ```
+
 ```bash
 1
 ```
+
 ```bash
 2048
 ```
+
 ```bash
 33263
 ```
+
 ```bash
 n
 ```
+
 ```bash
 e
 ```
+
 ```bash
 4
 ```
+
 ```bash
 33264
 ```
+
 ```bash
 163295
 ```
+
 ```bash
 p
 ```
+
 ```bash
 n
 ```
+
 ```bash
 35312
 ```
+
 ```bash
 51407
 ```
+
 ```bash
 n
 ```
+
 ```bash
 53456
 ```
+
 ```bash
 76607
 ```
+
 ```bash
 n
 ```
+
 ```bash
 78656
 ```
+
 ```bash
 91727
 ```
+
 ```bash
 n
 ```
+
 ```bash
 93776
 ```
+
 ```bash
 121967
 ```
+
 ```bash
 n
 ```
+
 ```bash
 124016
 ```
+
 ```bash
 163295
 ```
+
 ```bash
 p
 ```
+
 ```bash
 t
 ```
+
 ```bash
 5
 ```
+
 ```bash
 66
 ```
+
 ```bash
 t
 ```
+
 ```bash
 6
 ```
+
 ```bash
 66
 ```
+
 ```bash
 t
 ```
+
 ```bash
 7
 ```
+
 ```bash
 66
 ```
+
 ```bash
 t
 ```
+
 ```bash
 8
 ```
+
 ```bash
 66
 ```
+
 ```bash
 t
 ```
+
 ```bash
 9
 ```
+
 ```bash
 66
 ```
+
 ```bash
 p
 ```
+
 ```bash
 w
 ```
 
 - 查看分区
+
 ```bash
 fdisk -l hd80M.img
 ```
 
 - 最后终端编译所有文件
+
 ```makefile
 make all
 ```
 
 - 运行程序
+
 ```makefile
 make run
 ```
