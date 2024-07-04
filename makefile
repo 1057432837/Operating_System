@@ -153,7 +153,7 @@ install_env:
 	cd ..; sudo apt install build-essential; sudo apt-get install libghc-x11-dev; sudo apt-get install xorg-dev; sudo apt install nasm
 
 install_bochs:
-# 	tar -zxvf bochs-2.6.8.tar.gz; mkdir bochs; cd bochs-2.6.8; ./configure --prefix=${realpath bochs} --enable-debugger --enable-disasm --enable-iodebug --enable-x86-debugger --with-x --with-x11 LDFLAGS='-pthread'; make; make install
+	tar -zxvf bochs-2.6.8.tar.gz; mkdir bochs; cd bochs-2.6.8; ./configure --prefix=${realpath bochs} --enable-debugger --enable-disasm --enable-iodebug --enable-x86-debugger --with-x --with-x11 LDFLAGS='-pthread'; make; make install
 
 mk_disk:
 # 	cd bochs; touch bochsrc.disk; echo "
