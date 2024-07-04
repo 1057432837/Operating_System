@@ -4,6 +4,42 @@
 make install_env
 ```
 
+- 在根目录新建bochs文件夹
+
+```bash
+mkdir bochs
+```
+
+- 解压bochs-2.6.8.tar.gz
+
+```bash
+tar -zxvf bochs-2.6.8.tar.gz
+```
+
+- 进入bochs-2.6.8
+
+```bash
+cd bochs-2.6.8
+```
+
+- 配置，修改${realpath bochs}为你的bochs文件子目录，例如./configure --prefix=/home/XXX/桌面/Operating_System/bochs --enable-debugger --enable-disasm --enable-iodebug --enable-x86-debugger --with-x --with-x11 LDFLAGS='-pthread'
+
+```bash
+./configure --prefix=${realpath bochs} --enable-debugger --enable-disasm --enable-iodebug --enable-x86-debugger --with-x --with-x11 LDFLAGS='-pthread'
+```
+
+- 继续在bochs-2.6.8文件夹下输入make
+
+```bash
+make
+```
+
+- 继续在bochs-2.6.8文件夹下输入make install
+
+```bash
+make install
+```
+
 - 打开/etc/apt/sources.list增加
 
 ```yaml
@@ -56,53 +92,11 @@ sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.4 40
 ```
 
 ```bash
-sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-5 60
+sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-大版本号 60
 ```
 
 ```bash
-update-alternatives --config gcc
-```
-
-- 在根目录新建bochs文件夹
-
-```bash
-mkdir bochs
-```
-
-- 解压bochs-2.6.8.tar.gz
-
-```bash
-tar -zxvf bochs-2.6.8.tar.gz
-```
-
-- 进入bochs-2.6.8
-
-```bash
-cd bochs-2.6.8
-```
-
-- 配置，修改${realpath bochs}为你的bochs文件子目录，例如./configure --prefix=/home/XXX/桌面/Operating_System/bochs --enable-debugger --enable-disasm --enable-iodebug --enable-x86-debugger --with-x --with-x11 LDFLAGS='-pthread'
-
-```bash
-./configure --prefix=${realpath bochs} --enable-debugger --enable-disasm --enable-iodebug --enable-x86-debugger --with-x --with-x11 LDFLAGS='-pthread'
-```
-
-- 继续在bochs-2.6.8文件夹下输入make
-
-```bash
-make
-```
-
-- 继续在bochs-2.6.8文件夹下输入make install
-
-```bash
-make install
-```
-
-- 返回根目录
-
-```bash
-cd ..
+sudo update-alternatives --config gcc
 ```
 
 - 进入bochs文件夹
