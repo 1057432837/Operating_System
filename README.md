@@ -77,26 +77,8 @@ sudo apt-get update
 
 - 安装gcc4.4版本
 
-```bash
-sudo apt-get install g++-4.4
-```
-
-- 如果有gcc版本冲突，换一下优先级，用4.4版本的
-
-```bash
-gcc -v
-```
-
-```bash
-sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.4 40
-```
-
-```bash
-sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-大版本号 60
-```
-
-```bash
-sudo update-alternatives --config gcc
+```makefile
+make install_compiler
 ```
 
 - 进入bochs文件夹

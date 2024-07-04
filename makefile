@@ -3,6 +3,7 @@ BUILD_DIR=./build
 RUN_DIR = ./bochs
 ENTRY_POINT=0xc0001500
 HD60M_PATH=bochs/hd60M.img
+text="deb http://dk.archive.ubuntu.com/ubuntu/ trusty main universe"
 #只需要把hd60m.img路径改成自己环境的路径，整个代码直接make all就完全写入了，能够运行成功
 AS=nasm
 CC=gcc-4.4
@@ -147,33 +148,42 @@ $(BUILD_DIR)/kernel.bin:$(OBJS)
 	$(LD) $(LDFLAGS) -o $@ $^
 # $^表示规则中所有依赖文件的集合，如果有重复，会自动去重
 
-.PHONY:install_env install_bochs mk_disk mk_dir hd clean build all boot gdb_symbol run install_compiler update_sources	#定义了7个伪目标
+.PHONY:install_env install_bochs update_sources install_compiler mk_disk mk_dir hd clean build all boot gdb_symbol run	#定义了7个伪目标
 
 install_env:
 	cd ..; sudo apt install build-essential; sudo apt-get install libghc-x11-dev; sudo apt-get install xorg-dev; sudo apt install nasm
 
-install_bochs:
-	tar -zxvf bochs-2.6.8.tar.gz; mkdir bochs; cd bochs-2.6.8; ./configure --prefix=${realpath bochs} --enable-debugger --enable-disasm --enable-iodebug --enable-x86-debugger --with-x --with-x11 LDFLAGS='-pthread'; make; make install
+# install_bochs:
+# 	tar -zxvf bochs-2.6.8.tar.gz; mkdir bochs; cd bochs-2.6.8; ./configure --prefix=${realpath bochs} --enable-debugger --enable-disasm --enable-iodebug --enable-x86-debugger --with-x --with-x11 LDFLAGS='-pthread'; make; make install
 
-mk_disk:
-# 	cd bochs; touch bochsrc.disk; echo "
-# 		megs : 32	\
+# update_sources:
+# 	if [ `grep text /etc/apt/sources.list` -eq '0' ]; then @cd /etc/apt; sudo echo "\n"; sudo echo "deb http://dk.archive.ubuntu.com/ubuntu/ trusty main universe" >> /etc/apt/sources.list; sudo echo "deb http://dk.archive.ubuntu.com/ubuntu/ trusty-updates main universe" >> /etc/apt/sources.list; sudo apt-get update; fi
 
-# 		romimage: file=${realpath bochs}/share/bochs/BIOS-bochs-latest	\
-# 		vgaromimage: file=${realpath bochs}/share/bochs/VGABIOS-lgpl-latest	\
+install_compiler:
+	sudo apt-get install g++-4.4; sudo update-alternatives --config gcc
 
-# 		boot: disk	\
+# mk_disk:
+# 	cd bochs;
+# 	touch bochsrc.disk;
+# 	echo "
+# 		megs : 32
 
-# 		log: bochs.out	\
+# 		romimage: file=${realpath bochs}/share/bochs/BIOS-bochs-latest
+# 		vgaromimage: file=${realpath bochs}/share/bochs/VGABIOS-lgpl-latest
 
-# 		mouse:enabled=0	\
-# 		keyboard:keymap=${realpath bochs}/share/bochs/keymaps/x11-pc-us.map	\
+# 		boot: disk
 
-# 		ata0:enabled=1,ioaddr1=0x1f0,ioaddr2=0x3f0,irq=14	\
-# 		ata0-master: type=disk, path="hd60M.img", mode=flat,cylinders=121,heads=16,spt=63	\
+# 		log: bochs.out
+
+# 		mouse:enabled=0
+# 		keyboard:keymap=${realpath bochs}/share/bochs/keymaps/x11-pc-us.map
+
+# 		ata0:enabled=1,ioaddr1=0x1f0,ioaddr2=0x3f0,irq=14
+# 		ata0-master: type=disk, path="hd60M.img", mode=flat,cylinders=121,heads=16,spt=63
 
 # 		#gdbstub:enabled=1,port=1234,text_base=0,data_base=0,bss_base=0
-# 	" > bochsrc.disk; bin/bximage
+# 	" >> bochsrc.disk;
+# 	bin/bximage
 
 mk_dir:
 	if [ ! -d $(BUILD_DIR) ];then mkdir $(BUILD_DIR);fi 
@@ -201,8 +211,3 @@ all:mk_dir boot build hd gdb_symbol
 run:
 	@cd $(RUN_DIR) && bin/bochs -f bochsrc.disk && "program running...	ʕ•ᴥ•ʔ"
 
-install_compiler:
-	sudo apt-get install g++-4.4 && sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.4 40 && sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-11 60 && update-alternatives --config gcc
-
-update_sources:
-	if [ `grep -c "deb http://dk.archive.ubuntu.com/ubuntu/ trusty main universe" /etc/apt/sources.list` -eq '0' ]; then @cd /etc/apt; echo "\n"; echo "deb http://dk.archive.ubuntu.com/ubuntu/ trusty main universe" >> /etc/apt/sources.list; echo "deb http://dk.archive.ubuntu.com/ubuntu/ trusty-updates main universe" >> /etc/apt/sources.list; sudo apt-get update; fi
