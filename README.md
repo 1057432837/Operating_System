@@ -22,13 +22,13 @@ tar -zxvf bochs-2.6.8.tar.gz
 cd bochs-2.6.8
 ```
 
-- 配置，修改${realpath bochs}为你的bochs文件子目录，例如./configure --prefix=/home/XXX/桌面/Operating_System/bochs --enable-debugger --enable-disasm --enable-iodebug --enable-x86-debugger --with-x --with-x11 LDFLAGS='-pthread'
+- 配置，★★★一定要修改${realpath bochs}为你的bochs文件子目录，例如./configure --prefix=/home/XXX/桌面/Operating_System/bochs --enable-debugger --enable-disasm --enable-iodebug --enable-x86-debugger --with-x --with-x11 LDFLAGS='-pthread'★★★
 
 ```bash
 ./configure --prefix=${realpath bochs} --enable-debugger --enable-disasm --enable-iodebug --enable-x86-debugger --with-x --with-x11 LDFLAGS='-pthread'
 ```
 
-- 继续在bochs-2.6.8文件夹下输入make
+- 继续在bochs-2.6.8文件夹下输入make，这里要用高一些的版本的gcc编译器来编译bochs模拟器，下面有安装gcc4.4版本的编译器，踩过坑，不能用来编译bochs模拟器，会报错，当然按照此文档顺序基本不会错的，忽略这句话就好
 
 ```bash
 make
@@ -75,7 +75,7 @@ sudo cp trusted.gpg trusted.gpg.d
 sudo apt-get update
 ```
 
-- 安装gcc4.4版本
+- 安装gcc4.4版本，并手动切换为4.4版本来编译此操作系统
 
 ```makefile
 make install_compiler
