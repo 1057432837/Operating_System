@@ -55,3 +55,10 @@ PG_US_U	 equ  100b
 
                                                     ;-------------  程序段的 type 定义   --------------
 PT_NULL equ 0
+
+CYLS equ 0x0ff0
+LEDS equ 0x0ff1
+VMODE equ 0x0ff2
+SCRNX equ 0x0ff4
+SCRNY equ 0x0ff6
+VRAM equ 0x0ff8
