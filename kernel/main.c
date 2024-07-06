@@ -16,14 +16,11 @@ extern int io_load_eflags(void);
 extern void io_store_eflags(int eflags);
 
 void init(void);
-void init_palette(void);
-void set_palette(int start, int end, unsigned char* rgb);
-void boxfill8(unsigned char *vram, int xsize, unsigned char c, int x0, int y0, int x1, int y1);
 
 int main(void)
 {
     // put_str("I am kernel\n");
-    // init_all();
+    init_all();
 
     // uint32_t file_size = 21816;
     // uint32_t sec_cnt = DIV_ROUND_UP(file_size, 512);
@@ -45,13 +42,7 @@ int main(void)
     // console_put_str("[rabbit@localhost /]$ ");
     // thread_exit(running_thread(), true);
     // return 0;
-    char *vram;
-    int xsize, ysize;
-    init_palette();
-    vram = (char*)0xa0000;
-    xsize = 320;
-    ysize = 200;
-    draw_desktop(vram, xsize, ysize);
+
 
     while (1);
 }
