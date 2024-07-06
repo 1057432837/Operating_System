@@ -27,7 +27,7 @@ OBJS=$(BUILD_DIR)/main.o $(BUILD_DIR)/init.o \
 	$(BUILD_DIR)/tss.o	$(BUILD_DIR)/process.o	$(BUILD_DIR)/syscall.o $(BUILD_DIR)/syscall-init.o \
 	$(BUILD_DIR)/stdio.o $(BUILD_DIR)/stdio-kernel.o $(BUILD_DIR)/ide.o $(BUILD_DIR)/fs.o $(BUILD_DIR)/inode.o \
 	$(BUILD_DIR)/file.o $(BUILD_DIR)/dir.o $(BUILD_DIR)/fork.o $(BUILD_DIR)/shell.o $(BUILD_DIR)/buildin_cmd.o \
-	$(BUILD_DIR)/exec.o $(BUILD_DIR)/assert.o $(BUILD_DIR)/wait_exit.o $(BUILD_DIR)/pipe.o
+	$(BUILD_DIR)/exec.o $(BUILD_DIR)/assert.o $(BUILD_DIR)/wait_exit.o $(BUILD_DIR)/pipe.o $(BUILD_DIR)/nasmfunc.o
 #顺序最好是调用在前，实现在后
 
 ######################编译两个启动文件的代码#####################################
@@ -143,6 +143,9 @@ $(BUILD_DIR)/switch.o:thread/switch.S
 	
 $(BUILD_DIR)/wait_exit.o:userprog/wait_exit.c
 	$(CC) $(CFLAGS) -o $@ $<
+
+$(BUILD_DIR)/nasmfunc.o:kernel/nasmfunc.S 
+	$(AS) $(ASFLAGS) -o $@ $<
 ##################链接所有内核目标文件##################################################
 $(BUILD_DIR)/kernel.bin:$(OBJS)
 	$(LD) $(LDFLAGS) -o $@ $^
