@@ -8,7 +8,7 @@ text="deb http://dk.archive.ubuntu.com/ubuntu/ trusty main universe"
 AS=nasm
 CC=gcc-4.4
 LD=ld
-LIB= -I lib/ -I lib/kernel/ -I lib/user/ -I kernel/ -I device/ -I thread/ -I userprog/	-I fs/ -I shell/
+LIB= -I lib/ -I lib/kernel/ -I lib/user/ -I kernel/ -I device/ -I thread/ -I userprog/	-I fs/ -I shell/ -I graph/
 ASFLAGS= -f elf -g
 CFLAGS= -Wall $(LIB) -c -fno-builtin -W -Wstrict-prototypes -Wmissing-prototypes -m32 -fno-stack-protector -g
 #-Wall warning all的意思，产生尽可能多警告信息，-fno-builtin不要采用内部函数，
@@ -27,7 +27,8 @@ OBJS=$(BUILD_DIR)/main.o $(BUILD_DIR)/init.o \
 	$(BUILD_DIR)/tss.o	$(BUILD_DIR)/process.o	$(BUILD_DIR)/syscall.o $(BUILD_DIR)/syscall-init.o \
 	$(BUILD_DIR)/stdio.o $(BUILD_DIR)/stdio-kernel.o $(BUILD_DIR)/ide.o $(BUILD_DIR)/fs.o $(BUILD_DIR)/inode.o \
 	$(BUILD_DIR)/file.o $(BUILD_DIR)/dir.o $(BUILD_DIR)/fork.o $(BUILD_DIR)/shell.o $(BUILD_DIR)/buildin_cmd.o \
-	$(BUILD_DIR)/exec.o $(BUILD_DIR)/assert.o $(BUILD_DIR)/wait_exit.o $(BUILD_DIR)/pipe.o $(BUILD_DIR)/nasmfunc.o
+	$(BUILD_DIR)/exec.o $(BUILD_DIR)/assert.o $(BUILD_DIR)/wait_exit.o $(BUILD_DIR)/pipe.o $(BUILD_DIR)/nasmfunc.o \
+	$(BUILD_DIR)/palette.o $(BUILD_DIR)/draw.o
 #顺序最好是调用在前，实现在后
 
 ######################编译两个启动文件的代码#####################################
@@ -130,6 +131,12 @@ $(BUILD_DIR)/assert.o:lib/user/assert.c
 	$(CC) $(CFLAGS) -o $@ $<
 	
 $(BUILD_DIR)/pipe.o:shell/pipe.c
+	$(CC) $(CFLAGS) -o $@ $<
+
+$(BUILD_DIR)/palette.o:graph/palette.c
+	$(CC) $(CFLAGS) -o $@ $<
+
+$(BUILD_DIR)/draw.o:graph/draw.c
 	$(CC) $(CFLAGS) -o $@ $<
 ###################编译汇编内核代码#####################################################
 $(BUILD_DIR)/kernel.o:kernel/kernel.S 
