@@ -2,6 +2,7 @@
 #include "global.h"
 #include "palette.h"
 #include "font.h"
+#include "stdio.h"
 
 void boxfill8(unsigned char *vram, int xsize, unsigned char c, int x0, int y0, int x1, int y1) {
     int x, y;
@@ -77,7 +78,7 @@ void putfont8(char *vram, int xsize, int x, int y, char c, char *font) {
 void putfonts8_asc(char *vram, int xsize, int x, int y, char c, unsigned char *s) {
     for (; *s != 0x00; s++)
     {
-        // putfont8(vram, xsize, x, y, c, s);   书上p96暂未解决
+        putfont8(vram, xsize, x, y, c, fonts + *s * 16);   //书上p96暂未解决
         x += 8;
     }
     return;
@@ -93,5 +94,8 @@ void init_screen() {
     binfo->scrny = 200;
     draw_screen(binfo->vram, binfo->scrnx, binfo->scrny);
     putfont8(binfo->vram, binfo->scrnx, 20, 20, COL8_FFFFFF, fonts[0]);
-    // putfonts8_asc(binfo->vram, binfo->scrnx, 8, 8, COL8_FFFFFF, "AB");
+    char* s = "ABC 123";
+    printf(s, "scrnx = %d", binfo->scrnx);
+    putfonts8_asc(binfo->vram, binfo->scrnx, 8, 8, COL8_FFFFFF, s);
+    
 }
