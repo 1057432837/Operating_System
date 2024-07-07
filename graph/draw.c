@@ -74,6 +74,15 @@ void putfont8(char *vram, int xsize, int x, int y, char c, char *font) {
     return;
 }
 
+void putfonts8_asc(char *vram, int xsize, int x, int y, char c, unsigned char *s) {
+    for (; *s != 0x00; s++)
+    {
+        // putfont8(vram, xsize, x, y, c, s);   书上p96暂未解决
+        x += 8;
+    }
+    return;
+}
+
 void init_screen() {
     // char *vram;
     // int xsize, ysize;
@@ -83,5 +92,6 @@ void init_screen() {
     binfo->scrnx = 320;
     binfo->scrny = 200;
     draw_screen(binfo->vram, binfo->scrnx, binfo->scrny);
-    putfont8(binfo->vram, binfo->scrnx, 20, 20, COL8_FFFFFF, font[0]);
+    putfont8(binfo->vram, binfo->scrnx, 20, 20, COL8_FFFFFF, fonts[0]);
+    // putfonts8_asc(binfo->vram, binfo->scrnx, 8, 8, COL8_FFFFFF, "AB");
 }
