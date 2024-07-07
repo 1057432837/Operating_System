@@ -83,5 +83,5 @@ void init_screen() {
     binfo->scrnx = 320;
     binfo->scrny = 200;
     draw_screen(binfo->vram, binfo->scrnx, binfo->scrny);
-    putfont8(binfo->vram, binfo->scrnx, 20, 20, COL8_FFFFFF, font_B);
+    putfont8(binfo->vram, binfo->scrnx, 20, 20, COL8_FFFFFF, font[0]);
 }
