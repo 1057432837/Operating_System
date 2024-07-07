@@ -1,11 +1,7 @@
 #include "draw.h"
 #include "global.h"
 #include "palette.h"
-
-static char font_A[16] = {
-    0x00, 0x18, 0x18, 0x18, 0x18, 0x24, 0x24, 0x24,
-    0x24, 0x7e, 0x42, 0x42, 0x42, 0xe7, 0x00, 0x00
-};
+#include "font.h"
 
 void boxfill8(unsigned char *vram, int xsize, unsigned char c, int x0, int y0, int x1, int y1) {
     int x, y;
@@ -36,55 +32,56 @@ void draw_screen(unsigned char *vram, int xsize, int ysize) {
     boxfill8(vram, xsize, COL8_FFFFFF,  xsize - 3, ysize - 24,  xsize - 3,  ysize - 3);
 }
 
-    void putfont8(char *vram, int xsize, int x, int y, char c, char *font) {
-        int i;
-        char d;
-        for (i = 0; i < 16; i++)
+void putfont8(char *vram, int xsize, int x, int y, char c, char *font) {
+    int i;
+    char d;
+    for (i = 0; i < 16; i++)
+    {
+        d = font[i];
+        if ((d & 0x80) != 0)
         {
-            d = font_A[i];
-            if ((d & 0x80) != 0)
-            {
-                vram[(y + i) * xsize + x + 0] = c;
-            }
-            if ((d & 0x40) != 0)
-            {
-                vram[(y + i) * xsize + x + 1] = c;
-            }
-            if ((d & 0x20) != 0)
-            {
-                vram[(y + i) * xsize + x + 2] = c;
-            }
-            if ((d & 0x10) != 0)
-            {
-                vram[(y + i) * xsize + x + 3] = c;
-            }
-            if ((d & 0x08) != 0)
-            {
-                vram[(y + i) * xsize + x + 4] = c;
-            }
-            if ((d & 0x04) != 0)
-            {
-                vram[(y + i) * xsize + x + 5] = c;
-            }
-            if ((d & 0x02) != 0)
-            {
-                vram[(y + i) * xsize + x + 6] = c;
-            }
-            if ((d & 0x01) != 0)
-            {
-                vram[(y + i) * xsize + x + 7] = c;
-            }
+            vram[(y + i) * xsize + x + 0] = c;
         }
-        return;
+        if ((d & 0x40) != 0)
+        {
+            vram[(y + i) * xsize + x + 1] = c;
+        }
+        if ((d & 0x20) != 0)
+        {
+            vram[(y + i) * xsize + x + 2] = c;
+        }
+        if ((d & 0x10) != 0)
+        {
+            vram[(y + i) * xsize + x + 3] = c;
+        }
+        if ((d & 0x08) != 0)
+        {
+            vram[(y + i) * xsize + x + 4] = c;
+        }
+        if ((d & 0x04) != 0)
+        {
+            vram[(y + i) * xsize + x + 5] = c;
+        }
+        if ((d & 0x02) != 0)
+        {
+            vram[(y + i) * xsize + x + 6] = c;
+        }
+        if ((d & 0x01) != 0)
+        {
+            vram[(y + i) * xsize + x + 7] = c;
+        }
     }
+    return;
+}
 
 void init_screen() {
-    char *vram;
-    int xsize, ysize;
+    // char *vram;
+    // int xsize, ysize;
+    struct BOOTINFO *binfo = (struct BOOTINFO*)0x0ff0;
     init_palette();
-    vram = (char*)0xa0000;
-    xsize = 320;
-    ysize = 200;
-    draw_screen(vram, xsize, ysize);
-    putfont8(vram, xsize, 20, 20, 'c', font_A);
+    binfo->vram = (char*)0xa0000;
+    binfo->scrnx = 320;
+    binfo->scrny = 200;
+    draw_screen(binfo->vram, binfo->scrnx, binfo->scrny);
+    putfont8(binfo->vram, binfo->scrnx, 20, 20, COL8_FFFFFF, font_B);
 }
