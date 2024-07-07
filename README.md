@@ -22,7 +22,7 @@ tar -zxvf bochs-2.6.8.tar.gz
 cd bochs-2.6.8
 ```
 
-- 配置，★★★一定要修改${realpath bochs}为你的bochs文件子目录，例如./configure --prefix=/home/XXX/桌面/Operating_System/bochs --enable-debugger --enable-disasm --enable-iodebug --enable-x86-debugger --with-x --with-x11 LDFLAGS='-pthread'★★★
+- 配置，★★★一定要修改${realpath bochs}为你的bochs文件子目录，例如./configure --prefix=/home/XXX/桌面/Operating_System/bochs --enable-debugger --enable-disasm --enable-iodebug --enable-x86-debugger --with-x --with-x11 LDFLAGS='-pthread'，用环境变量会报错★★★
 
 ```bash
 ./configure --prefix=${realpath bochs} --enable-debugger --enable-disasm --enable-iodebug --enable-x86-debugger --with-x --with-x11 LDFLAGS='-pthread'
