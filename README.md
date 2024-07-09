@@ -1,3 +1,8 @@
+- 安装make
+```make
+sudo apt install make
+```
+
 - 在根目录下执行make install_env
 
 ```makefile
