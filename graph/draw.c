@@ -1,8 +1,10 @@
 #include "draw.h"
 #include "global.h"
 #include "palette.h"
+#include "mouse.h"
 #include "font.h"
 #include "stdio.h"
+
 
 void boxfill8(unsigned char *vram, int xsize, unsigned char c, int x0, int y0, int x1, int y1) {
     int x, y;
@@ -33,19 +35,19 @@ void draw_screen(unsigned char *vram, int xsize, int ysize) {
     boxfill8(vram, xsize, COL8_FFFFFF,  xsize - 3, ysize - 24,  xsize - 3,  ysize - 3);
 }
 
-void init_screen() {
+void init_screen(void) {
     // char *vram;
     // int xsize, ysize;
     struct BOOTINFO *binfo = (struct BOOTINFO*)0x0ff0;
 
     init_palette();
 
-    binfo->vram = (char*)0xa0000;
+    binfo->vram = (unsigned char*)0xa0000;
     binfo->scrnx = 320;
     binfo->scrny = 200;
     draw_screen(binfo->vram, binfo->scrnx, binfo->scrny);
 
-    putfont8(binfo->vram, binfo->scrnx, 20, 20, COL8_FFFFFF, fonts[0]);
+    putfont8(binfo->vram, binfo->scrnx, 20, 20, COL8_FFFFFF, fonts);
 
     // char s[40];
     // printf(s, "scrnx = %d", binfo->scrnx);

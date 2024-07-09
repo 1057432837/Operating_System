@@ -1,6 +1,26 @@
 #include "mouse.h"
 #include "global.h"
 
+char cursor[16][16] = {
+    "**************..",
+	"*OOOOOOOOOOO*...",
+	"*OOOOOOOOOO*....",
+	"*OOOOOOOOO*.....",
+	"*OOOOOOOO*......",
+	"*OOOOOOO*.......",
+	"*OOOOOOO*.......",
+	"*OOOOOOOO*......",
+	"*OOOO**OOO*.....",
+	"*OOO*..*OOO*....",
+	"*OO*....*OOO*...",
+	"*O*......*OOO*..",
+	"**........*OOO*.",
+	"*..........*OOO*",
+	"............*OO*",
+	".............***"
+};
+
+
 void init_mouse_cursor8(char *mouse, char bc) {
     // extern cursor[16][16];
     int x, y;
@@ -27,7 +47,7 @@ void init_mouse_cursor8(char *mouse, char bc) {
     return;
 }
 
-void putblock8_8(char *vram, int vxsize, int pxsize, int pysize, int px0, int py0, char *buf, int bxsize) {
+void putblock8_8(unsigned char *vram, int vxsize, int pxsize, int pysize, int px0, int py0, char *buf, int bxsize) {
     int x, y;
     for (y = 0; y < pysize; y++)
     {

@@ -69,7 +69,7 @@ io_store_eflags:
     push eax
     popfd
     ret
-
+    
 load_gdtr:
     mov ax, [esp + 4]
     mov [esp + 6], ax

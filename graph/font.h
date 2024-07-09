@@ -1,20 +1,9 @@
-#ifndef __KERNEL_MOUSE_H
-#define __KERNEL_MOUSE_H
+#ifndef __KERNEL_FONT_H
+#define __KERNEL_FONT_H
 
-char fonts[26][16] = {
-//A
-{
-    0x00, 0x18, 0x18, 0x18, 0x18, 0x24, 0x24, 0x24,
-    0x24, 0x7e, 0x42, 0x42, 0x42, 0xe7, 0x00, 0x00
-},
-//B
-{
-    0x00, 0xfc, 0x82, 0x81, 0x81, 0x81, 0x82, 0xfc,
-    0x82, 0x81, 0x81, 0x81, 0x82, 0xfc, 0x00, 0x00
-}
-};
+extern char fonts[16];
 
-void putfont8(char *vram, int xsize, int x, int y, char c, char *font);
-void putfonts8_asc(char *vram, int xsize, int x, int y, char c, unsigned char *s);
+void putfont8(unsigned char *vram, int xsize, int x, int y, char c, char *font);
+void putfonts8_asc(unsigned char *vram, int xsize, int x, int y, char c, unsigned char *s);
 
 #endif
