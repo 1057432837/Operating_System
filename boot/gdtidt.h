@@ -13,7 +13,6 @@ struct GATE_DESCRIPTOR {
     short offset_high;
 };
 
-
 extern void load_gdtr(int limit, int addr);
 extern void load_idtr(int limit, int addr);
 void set_segmdesc(struct SEGMENT_DESCRIPTOR *sd, unsigned int limit, int base, int ar);

@@ -1,6 +1,5 @@
 #include "gdtidt.h"
 
-
 void set_segmdesc(struct SEGMENT_DESCRIPTOR *sd, unsigned int limit, int base, int ar) {
     if (limit > 0xfffff)
     {
