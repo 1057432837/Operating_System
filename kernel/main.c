@@ -10,11 +10,6 @@
 #include "stdio-kernel.h"
 #include "palette.h"
 
-extern void io_cli(void);
-extern void io_out8(int port, int data);
-extern int io_load_eflags(void);
-extern void io_store_eflags(int eflags);
-
 void init(void);
 
 int main(void)
@@ -42,8 +37,6 @@ int main(void)
     // console_put_str("[rabbit@localhost /]$ ");
     // thread_exit(running_thread(), true);
     // return 0;
-
-
 
     while (1);
 }
