@@ -111,4 +111,6 @@ struct gdt_desc {
 #define COL8_008484   14
 #define COL8_848484   15
 
+#define ADR_BOOTINFO	0x00000ff0
+
 #endif

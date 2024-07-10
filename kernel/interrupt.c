@@ -4,7 +4,6 @@
 #include "io.h"             
 #include "print.h"
 
-
 #define PIC_M_CTRL 0x20	       // 这里用的可编程中断控制器是8259A,主片的控制端口是0x20
 #define PIC_M_DATA 0x21	       // 主片的数据端口是0x21
 #define PIC_S_CTRL 0xa0	       // 从片的控制端口是0xa0
@@ -39,6 +38,8 @@ intr_handler idt_table[IDT_DESC_CNT];	     // 定义中断处理程序数组.在
 
 /* 初始化可编程中断控制器8259A */
 static void pic_init(void) {
+   outb (PIC_M_DATA, 0xff);
+   outb (PIC_S_DATA, 0xff);
 
    /* 初始化主片 */
    outb (PIC_M_CTRL, 0x11);   // ICW1: 边沿触发,级联8259, 需要ICW4.
