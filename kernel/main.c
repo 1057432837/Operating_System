@@ -34,7 +34,7 @@ int main()
     }
 
     cls_screen();
-    console_put_str("[rabbit@localhost /]$ ");
+    console_put_str("[lxc@localhost /]$ ");
     thread_exit(running_thread(), true);
     return 0;
 
