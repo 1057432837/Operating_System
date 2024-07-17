@@ -19,19 +19,19 @@ SECTION MBR vstart=0x7c00
     mov cx, 0
     mov dx, 184fh
 
-    mov al, 0x13    ;开启不同模式
-    mov ah, 0x00
+    ;mov al, 0x13    ;开启不同模式
+    ;mov ah, 0x00
 
     int 10h
 
-    mov byte [VMODE], 8
-    mov word [SCRNX], 320
-    mov word [SCRNY], 200
-    mov dword [VRAM], 0x000a0000
+    ;mov byte [VMODE], 8
+    ;mov word [SCRNX], 320
+    ;mov word [SCRNY], 200
+    ;mov dword [VRAM], 0x000a0000
 
-    mov ah, 0x02
-    int 0x16
-    mov [LEDS], al
+    ;mov ah, 0x02
+    ;int 0x16
+    ;mov [LEDS], al
 
     mov byte [gs:0x00],'1'
     mov byte [gs:0x01],0xA4
