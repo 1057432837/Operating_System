@@ -1,5 +1,5 @@
-#ifndef __KERNEL_PALETTE_H
-#define __KERNEL_PALETTE_H
+#ifndef __GRAPHIC_GRAPHIC_H
+#define __GRAPHIC_GRAPHIC_H
 
 #define COL8_000000   0
 #define COL8_FF0000   1
