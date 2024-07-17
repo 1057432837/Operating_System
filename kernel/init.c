@@ -10,7 +10,7 @@
 #include "syscall-init.h"
 #include "ide.h"
 #include "fs.h"
-#include "draw.h"
+#include "graphic.h"
 #include "gdtidt.h"
 
 /*负责初始化所有模块 */
@@ -28,5 +28,4 @@ void init_all() {
 	ide_init();	     // 初始化硬盘
 	filesys_init();   // 初始化文件系统
 	init_screen();
-	init_gdtidt();
 }

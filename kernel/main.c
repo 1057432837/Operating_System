@@ -8,13 +8,11 @@
 #include "console.h"
 #include "ide.h"
 #include "stdio-kernel.h"
-#include "palette.h"
-#include "draw.h"
-#include "font.h"
+#include "../graphic/graphic.h"
 
 void init(void);
 
-int main(int *esp)
+int main()
 {
     // put_str("I am kernel\n");
     init_all();
@@ -39,9 +37,6 @@ int main(int *esp)
     // console_put_str("[rabbit@localhost /]$ ");
     // thread_exit(running_thread(), true);
     // return 0;
-   struct BOOTINFO *binfo = (struct BOOTINFO*) ADR_BOOTINFO;
-   boxfill8(binfo->vram, binfo->scrnx, COL8_000000, 0, 0, 32 * 8 - 1, 15);
-//    putfonts8_asc(binfo->vram, binfo->scrnx, 0, 0, COL8_FFFFFF, "INT 21 (IRQ-1) : PS/2 keyboard");
 
     while (1);
 }
