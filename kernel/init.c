@@ -11,7 +11,6 @@
 #include "ide.h"
 #include "fs.h"
 #include "graphic.h"
-#include "gdtidt.h"
 
 /*负责初始化所有模块 */
 void init_all() {

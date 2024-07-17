@@ -2,6 +2,8 @@
 #include "global.h"
 #include "stdio.h"
 #include "bootpack.h"
+#include "dsctbl.h"
+#include "int.h"
 
 char fonts[16] = {
 //A
@@ -199,11 +201,14 @@ void init_screen(void) {
     char mcursor[256];
     int mx, my;
 
-    init_palette();
+    init_gdtidt();
+    init_pic();
+    io_sti();
 
     binfo->vram = (unsigned char*)0xa0000;
     binfo->scrnx = 320;
     binfo->scrny = 200;
+    init_palette();
     init_screen8(binfo->vram, binfo->scrnx, binfo->scrny);
     mx = (binfo->scrnx - 16) / 2; /* 计算画面的中心坐标*/
 	my = (binfo->scrny - 28 - 16) / 2;
@@ -212,5 +217,8 @@ void init_screen(void) {
     putblock8_8(binfo->vram, binfo->scrnx, 16, 16, mx, my, mcursor, 16);
 
     putfont8(binfo->vram, binfo->scrnx, 20, 20, COL8_FFFFFF, fonts);
+
+    io_out8(PIC0_IMR, 0xf9);
+	io_out8(PIC1_IMR, 0xef);
     
 }

@@ -1,5 +1,5 @@
-#ifndef __KERNEL_GDTIDT_H
-#define __KERNEL_GDTIDT_H
+#ifndef __KERNEL_DSCTBL_H
+#define __KERNEL_DSCTBL_H
 
 struct SEGMENT_DESCRIPTOR {
     short limit_low, base_low;
