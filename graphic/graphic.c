@@ -1,13 +1,7 @@
 #include "graphic.h"
 #include "global.h"
 #include "stdio.h"
-
-struct BOOTINFO
-{
-    char cyls, leds, vmode, reserve;
-    short scrnx, scrny;
-    unsigned char *vram;
-};
+#include "bootpack.h"
 
 char fonts[16] = {
 //A
