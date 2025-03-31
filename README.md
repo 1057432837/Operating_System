@@ -80,6 +80,12 @@ sudo cp trusted.gpg trusted.gpg.d
 sudo apt-get update
 ```
 
+- 返回根目录
+
+```bash
+cd ..
+```
+
 - 安装gcc4.4版本，并手动切换为4.4版本来编译此操作系统
 
 ```makefile
